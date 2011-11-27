@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2011 David van Tonder
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,35 +158,42 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             }
         };
 
-        mItems = new ArrayList<Action>();
 
-        // first: power off
-        mItems.add(
-            new SinglePressAction(
-                    com.android.internal.R.drawable.ic_lock_power_off,
-                    R.string.global_action_power_off) {
+        mItems = Lists.newArrayList(
+                // silent mode
+                mSilentModeToggle,
+                // next: airplane mode
+                mAirplaneModeOn,
+                // next: reboot
+                new SinglePressAction(com.android.internal.R.drawable.ic_lock_reboot, R.string.global_action_reboot) {
+                    public void onPress() {
+                    	ShutdownThread.reboot(mContext, "null", true);
+                    }
 
-                public void onPress() {
-                    // shutdown by making sure radio and power are handled accordingly.
-                    ShutdownThread.shutdown(mContext, true);
-                }
+                    public boolean showDuringKeyguard() {
+                        return true;
+                    }
 
-                public boolean showDuringKeyguard() {
-                    return true;
-                }
+                    public boolean showBeforeProvisioning() {
+                        return true;
+                    }
+                },
+                // last: power off
+                new SinglePressAction(com.android.internal.R.drawable.ic_lock_power_off, R.string.global_action_power_off) {
 
-                public boolean showBeforeProvisioning() {
-                    return true;
-                }
-            });
+                    public void onPress() {
+                        // shutdown by making sure radio and power are handled accordingly.
+                        ShutdownThread.shutdown(mContext, true);
+                    }
 
-        // next: airplane mode
-        mItems.add(mAirplaneModeOn);
+                    public boolean showDuringKeyguard() {
+                        return true;
+                    }
 
-        // last: silent mode
-        if (SHOW_SILENT_TOGGLE) {
-            mItems.add(mSilentModeAction);
-        }
+                    public boolean showBeforeProvisioning() {
+                        return true;
+                    }
+                });
 
         mAdapter = new MyAdapter();
 
