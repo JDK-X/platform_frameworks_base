@@ -2627,9 +2627,6 @@ case 180:
         case 270:
             displayOrientation = ISurfaceComposer::eOrientation270;
             break;
- case 360:
-            displayOrientation = ISurfaceComposer::eOrientation360;
-            break;
         }
     }
 
