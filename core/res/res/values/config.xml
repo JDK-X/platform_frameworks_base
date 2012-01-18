@@ -62,17 +62,17 @@
     <bool name="config_sf_slowBlur">true</bool>
 
     <!-- The duration (in milliseconds) of a short animation. -->
-    <integer name="config_shortAnimTime">200</integer>
+    <integer name="config_shortAnimTime">25</integer>
 
     <!-- The duration (in milliseconds) of a medium-length animation. -->
-    <integer name="config_mediumAnimTime">400</integer>
+    <integer name="config_mediumAnimTime">50</integer>
 
     <!-- The duration (in milliseconds) of a long animation. -->
-    <integer name="config_longAnimTime">500</integer>
+    <integer name="config_longAnimTime">75</integer>
 
     <!-- The duration (in milliseconds) of the activity open/close and fragment open/close animations. -->
-    <integer name="config_activityShortDur">150</integer>
-    <integer name="config_activityDefaultDur">220</integer>
+    <integer name="config_activityShortDur">100</integer>
+    <integer name="config_activityDefaultDur">150</integer>
 
     <!-- Duration for the dim animation behind a dialog.  This may be either
          a percentage, which is relative to the duration of the enter/open
@@ -280,7 +280,7 @@
 
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
-    <bool name="config_allowAllRotations">false</bool>
+    <bool name="config_allowAllRotations">true</bool>
 
     <!-- If true, the direction rotation is applied to get to an application's requested
          orientation is reversed.  Normally, the model is that landscape is
@@ -404,7 +404,7 @@
 
     <!-- Display low battery warning when battery level dips to this value.
          Also, the battery stats are flushed to disk when we hit this level.  -->
-    <integer name="config_criticalBatteryWarningLevel">4</integer>
+    <integer name="config_criticalBatteryWarningLevel">5</integer>
 
     <!-- Display low battery warning when battery level dips to this value -->
     <!-- Display low battery warning when battery level dips to this value -->
@@ -447,7 +447,7 @@
     <bool name="config_enableLockBeforeUnlockScreen">false</bool>
 
     <!-- Diable lockscreen rotation by default -->
-    <bool name="config_enableLockScreenRotation">false</bool>
+    <bool name="config_enableLockScreenRotation">true</bool>
 
     <!-- Enable puk unlockscreen by default.
          If unlock screen is disabled, the puk should be unlocked through Emergency Dialer -->
