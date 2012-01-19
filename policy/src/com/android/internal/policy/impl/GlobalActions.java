@@ -168,56 +168,68 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             }
         };
 
+        mItems = new ArrayList<Action>();
 
-        mItems = Lists.newArrayList(
-                // silent mode
-                mSilentModeToggle,
-                // next: airplane mode
-                mAirplaneModeOn,
-                // next: screenshot
-                new SinglePressAction(com.android.internal.R.drawable.ic_lock_screenshot, R.string.global_action_screenshot) {
-                    public void onPress() {
-                        takeScreenshot();
-                    }
+        // first: power off
+        mItems.add(
+            new SinglePressAction(
+                    com.android.internal.R.drawable.ic_lock_power_off,
+                    R.string.global_action_power_off) {
 
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
+                public void onPress() {
+                    // shutdown by making sure radio and power are handled accordingly.
+                    ShutdownThread.shutdown(mContext, true);
+                }
 
-                    public boolean showBeforeProvisioning() {
-                        return true;
-                    }
-                },
-                // next: reboot
-                new SinglePressAction(com.android.internal.R.drawable.ic_lock_reboot, R.string.global_action_reboot) {
-                    public void onPress() {
-                    	ShutdownThread.reboot(mContext, "null", true);
-                    }
+                public boolean showDuringKeyguard() {
+                    return true;
+                }
 
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
+                public boolean showBeforeProvisioning() {
+                    return true;
+                }
+            });
 
-                    public boolean showBeforeProvisioning() {
-                        return true;
-                    }
-                },
-                // last: power off
-                new SinglePressAction(com.android.internal.R.drawable.ic_lock_power_off, R.string.global_action_power_off) {
+        // next: reboot
+        mItems.add(
+            new SinglePressAction(com.android.internal.R.drawable.ic_lock_reboot, R.string.global_action_reboot) {
+                public void onPress() {
+                    ShutdownThread.reboot(mContext, "null", true);
+                }
 
-                    public void onPress() {
-                        // shutdown by making sure radio and power are handled accordingly.
-                        ShutdownThread.shutdown(mContext, true);
-                    }
+                public boolean showDuringKeyguard() {
+                    return true;
+                }
 
-                    public boolean showDuringKeyguard() {
-                        return true;
-                    }
+                public boolean showBeforeProvisioning() {
+                    return true;
+                }
+            });
 
-                    public boolean showBeforeProvisioning() {
-                        return true;
-                    }
-                });
+        // next: screenshot
+        mItems.add(
+            new SinglePressAction(com.android.internal.R.drawable.ic_lock_screenshot, R.string.global_action_screenshot) {
+                public void onPress() {
+                    takeScreenshot();
+                }
+
+                public boolean showDuringKeyguard() {
+                    return true;
+                }
+
+                public boolean showBeforeProvisioning() {
+                    return true;
+                }
+            });
+
+        // next: airplane mode
+        mItems.add(mAirplaneModeOn);
+
+        // last: silent mode
+        if (SHOW_SILENT_TOGGLE) {
+            mItems.add(mSilentModeAction);
+        }
+
 
         mAdapter = new MyAdapter();
 
@@ -327,11 +339,13 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         } else {
             mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
         }
+
+        mDialog.setTitle(R.string.global_actions);
+
         if (SHOW_SILENT_TOGGLE) {
             IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
             mContext.registerReceiver(mRingerModeReceiver, filter);
         }
-        mDialog.setTitle(R.string.global_actions);
     }
 
 
