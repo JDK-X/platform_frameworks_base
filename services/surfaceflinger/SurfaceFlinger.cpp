@@ -2627,6 +2627,9 @@ case 180:
         case 270:
             displayOrientation = ISurfaceComposer::eOrientation270;
             break;
+ case 360:
+            displayOrientation = ISurfaceComposer::eOrientation360;
+            break;
         }
     }
 
@@ -2661,6 +2664,9 @@ status_t GraphicPlane::orientationToTransfrom(
         break;
     case ISurfaceComposer::eOrientation270:
         flags = Transform::ROT_270;
+        break;
+    case ISurfaceComposer::eOrientation360:
+        flags = Transform::ROT_360;
         break;
     default:
         return BAD_VALUE;
