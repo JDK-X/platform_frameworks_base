@@ -280,7 +280,7 @@
 
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
-    <bool name="config_allowAllRotations">false</bool>
+    <bool name="config_allowAllRotations">true</bool>
 
     <!-- If true, the direction rotation is applied to get to an application's requested
          orientation is reversed.  Normally, the model is that landscape is
@@ -404,7 +404,7 @@
 
     <!-- Display low battery warning when battery level dips to this value.
          Also, the battery stats are flushed to disk when we hit this level.  -->
-    <integer name="config_criticalBatteryWarningLevel">4</integer>
+    <integer name="config_criticalBatteryWarningLevel">5</integer>
 
     <!-- Display low battery warning when battery level dips to this value -->
     <!-- Display low battery warning when battery level dips to this value -->
