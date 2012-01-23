@@ -91,7 +91,7 @@
             android:layout_height="match_parent"
             android:singleLine="true"
             android:paddingLeft="6dip"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             />
     </LinearLayout>
         
